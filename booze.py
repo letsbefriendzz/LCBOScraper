@@ -22,7 +22,8 @@ class booze:
         self.alc_content = newAlc
 
         try:
-            perc = newAlc / 100
-            self.price_index = self.price / ( self.volume * perc )
+            perc = float(newAlc / 100)
+            alc_vol = float(newVolume) * perc
+            self.price_index = float(self.price / alc_vol)
         except:
-            self.price_index = -1
+            self.price_index = 255

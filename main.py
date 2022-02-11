@@ -18,12 +18,18 @@ booze_types = {
                 "vodka":    "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/vodka-15019?pageView=grid&orderBy=5&beginIndex=",
                 "rum":      "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/rum-15016?pageView=grid&orderBy=5&beginIndex=",
                 "gin":      "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/gin-15014?pageView=grid&orderBy=5&beginIndex=",
-                "tequila":  "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/tequila-15018?pageView=grid&orderBy=5&beginIndex=",
-                "whisky":   "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/whisky?pageView=grid&orderBy=5&beginIndex="
+                "tequila":  "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/tequila-15018?pageView=grid&orderBy=5&beginIndex="
             }
-
+#,"whisky":   "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/whisky?pageView=grid&orderBy=5&beginIndex="
 wine = {"red": "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/wine-14/red-wine-14001?pageView=grid&orderBy=5&beginIndex=",
-        "white": "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/wine-14/white-wine-14002?pageView=grid&orderBy=5&beginIndex="}
+        "white": "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/wine-14/white-wine-14002?pageView=grid&orderBy=5&beginIndex="
+        }
+
+list_worth_scanning = {
+                    "vodka":    "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/vodka-15019?pageView=grid&orderBy=3&beginIndex=",
+                    "gin":      "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/gin-15014?pageView=grid&orderBy=3&beginIndex=",
+                    "red": "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/wine-14/red-wine-14001?pageView=grid&orderBy=3&beginIndex=",
+                    "white": "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/wine-14/white-wine-14002?pageView=grid&orderBy=3&beginIndex=" }
 
 # Array to store booze results
 results = []
@@ -31,7 +37,7 @@ results = []
 def scanForBooze(type):
     begin_index = 0
     while True:
-        page = requests.request("GET", booze_types[type]
+        page = requests.request("GET", list_worth_scanning[type]
                         + str(begin_index),
                         headers={"User-Agent":UA})
 
@@ -64,7 +70,7 @@ def scanForBooze(type):
             results.append(booze.booze(liq_title, liq_price, liq_volum, percentage))
             i += 1
         
-        if i == 0 or page.status_code != 200 or begin_index == 12:
+        if i == 0 or page.status_code != 200:
             break
 
         begin_index = begin_index + 12
@@ -78,9 +84,8 @@ def time_convert(sec):
 
 # MAIN THREAD
 start_time = time.time()
-for i in booze_types:
-    if i == "tequila":
-        scanForBooze(i)
+for i in list_worth_scanning:
+    scanForBooze(i)
 
 end_time = time.time()
 
@@ -91,9 +96,10 @@ price_indices = []
 volumes = []
 names = []
 for r in results:
-    price_indices.append(float(r.price_index))
-    volumes.append(float(r.volume))
-    names.append(r.name)
+    if r.price_index < 0.1 and int(r.volume) > 749:
+        price_indices.append(float(r.price_index))
+        volumes.append(float(r.volume))
+        names.append(r.name)
 
 fig, ax = plt.subplots()
 
@@ -102,9 +108,9 @@ ax.plot(price_indices, volumes, 'o', color='black')
 # set titles
 
 for i, txt in enumerate(names):
-    if price_indices[i] <= 0.0375:
+    if price_indices[i] <= 0.075:
         ax.annotate(txt, (price_indices[i], volumes[i]))
 
-ax.set(xlabel="Price Index - $/alc%", ylabel="Volume", title="Student Chart of Alcoholism")
+ax.set(xlabel="Price Index - $/mL of Alcohol", ylabel="Volume", title="Student Chart of Alcoholism")
 plt.legend()
 plt.show()
