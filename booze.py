@@ -11,6 +11,8 @@ class booze:
     category = ""       # category of booze (i.e. beer, vodka, wine)
     type = ""           # type of booze (i.e. lager, ale, IPA)
 
+    url = ""
+
     price_index = 0     # price index ( price / ( vol * alc_content ) )
 
     def __lt__(self, other):
@@ -21,7 +23,7 @@ class booze:
         self.price = ""
         self.volume = ""
 
-    def __init__(self, newName, newPrice, newVolume, newAlc, newOrigin, newBrand, newCategory, newType):
+    def __init__(self, newName, newPrice, newVolume, newAlc, newOrigin, newBrand, newCategory, newType, newUrl):
         try:
             self.name = "\"" + newName + "\""
             self.price = float(newPrice)
@@ -31,6 +33,7 @@ class booze:
             self.brand = "\"" + newBrand + "\""
             self.category = "\"" + newCategory + "\""
             self.type = "\"" + newType + "\""
+            self.url = "\"" + newUrl + "\""
         except:
             self.name = "NULL"
             self.price = -1
@@ -52,4 +55,5 @@ class booze:
                   + str(self.price) + ","
                   + str(self.volume) + ","
                   + str(self.alc_content) + ","
-                  + str(self.origin) )
+                  + str(self.origin) + ","
+                  + str(self.url) )

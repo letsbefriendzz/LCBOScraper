@@ -2,7 +2,8 @@ from http.client import REQUEST_HEADER_FIELDS_TOO_LARGE
 from bs4 import BeautifulSoup
 import requests
 import time
-from lcbo_data import alcohol
+from lcbo_data import lcbo_urls
+import sys
 
 import booze
 
@@ -130,7 +131,7 @@ def scanForBooze(lcbo_url, index = 0):
 
             # finally, we instantiate a new booze object and append it to our results list.
             # results.append(booze.booze(liq_title, liq_price, liq_volum, percentage, origin, brand))
-            write_to_file(booze.booze(liq_title, liq_price, liq_volum, percentage, origin, brand, str(category), str(type)))
+            write_to_file(booze.booze(liq_title, liq_price, liq_volum, percentage, origin, brand, str(category), str(type), liq_url))
             i += 1
         
         if i == 0 or page.status_code != 200:
@@ -138,13 +139,13 @@ def scanForBooze(lcbo_url, index = 0):
 
         begin_index = begin_index + 12
 
-# MAIN THREAD
-start_time = time.time()
+# main thread
+if len(sys.argv) > 1:
+    category = sys.argv[1]
+    for type in lcbo_urls[category]:
+        scanForBooze( lcbo_urls[category][type] )
 # category = beer, wine, vodka, etc
-for category in alcohol:
-    # type = lager, ale, etc
-    for type in alcohol[category]:
-        scanForBooze(alcohol[category][type])
+
 
 """
 end_time = time.time()
