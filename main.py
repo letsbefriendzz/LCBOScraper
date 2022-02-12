@@ -84,6 +84,7 @@ def scanForBooze(lcbo_url, index = 0):
             # the tital happens to be the first. Thus we can find the first instance of a hyperlink (<a>) with a tabindex
             # value of 0. We take the inner text component of this object as the liq_title variable.
             liq_title = str(p.find('a', {'tabindex': '0'}).text)
+            liq_title = liq_title.replace(',', ';')
 
             # alc % acquisition
             
@@ -105,11 +106,13 @@ def scanForBooze(lcbo_url, index = 0):
             percentage = float(details.split('Alcohol/Vol:')[1].split('%')[0].strip())
             try:
                 brand = str(details_html).split('<dt><b>By:</b></dt>')[1].split('</span></dd>')[0].split('<dd><span>')[1]
+                brand = brand.replace(',', ';')
             except:
                 brand = "NULL"
 
             try:
                 origin = str(details_html).split('<dt><b>Made In:</b></dt>')[1].split('</span></dd>')[0].split('<dd><span>')[1].strip()
+                origin = origin.replace(',', ';')
             except:
                 origin = "NULL"
  

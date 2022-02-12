@@ -25,15 +25,15 @@ class booze:
 
     def __init__(self, newName, newPrice, newVolume, newAlc, newOrigin, newBrand, newCategory, newType, newUrl):
         try:
-            self.name = "\"" + newName + "\""
+            self.name = newName.strip('"')
             self.price = float(newPrice)
             self.volume = int(newVolume)
             self.alc_content = float(newAlc)
-            self.origin = "\"" + newOrigin + "\""
-            self.brand = "\"" + newBrand + "\""
-            self.category = "\"" + newCategory + "\""
-            self.type = "\"" + newType + "\""
-            self.url = "\"" + newUrl + "\""
+            self.origin = newOrigin.strip('"')
+            self.brand = newBrand.strip('"')
+            self.category = newCategory.strip('"')
+            self.type = newType.strip('"')
+            self.url = newUrl.strip('"')
         except:
             self.name = "NULL"
             self.price = -1
@@ -48,12 +48,12 @@ class booze:
             self.price_index = 255
 
     def toCsv(self):
-        return str( str(self.name) + ","
-                  + str(self.brand) + ","
-                  + str(self.category) + ","
-                  + str(self.type) + ","
+        return str( "\"" + str(self.name) + "\"" + ","
+                  + "\"" + str(self.brand) + "\"" + ","
+                  + "\"" + str(self.category) + "\"" + ","
+                  + "\"" + str(self.type) + "\"" + ","
                   + str(self.price) + ","
                   + str(self.volume) + ","
                   + str(self.alc_content) + ","
-                  + str(self.origin) + ","
-                  + str(self.url) )
+                  + "\"" + str(self.origin) + "\"" + ","
+                  + "\"" + str(self.url) + "\"" )
