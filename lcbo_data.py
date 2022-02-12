@@ -55,7 +55,7 @@ lcbo_urls = {
     },
 
     "Grappa": {
-        "grappa":           "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/grappa?pageView=grid&orderBy=5&beginIndex="
+        "Grappa":           "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/grappa?pageView=grid&orderBy=5&beginIndex="
     },
 
     "Liqueur": {
@@ -130,7 +130,7 @@ lcbo_urls = {
         "European Fortified":   "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/fortified-wine/european-fortified-14008014?pageView=grid&orderBy=5&beginIndex="
     },
 
-    "Speiality Wine": {
+    "Specialty Wine": {
         "Flavoured":        "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/specialty-wines-14009/flavoured-wine-14009015?pageView=grid&orderBy=5&beginIndex=",
         "Fruit Wine":       "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/specialty-wines-14009/fruit-wine-14009016?pageView=grid&orderBy=5&beginIndex=",
         "Vermouth/Aperitif":    "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/specialty-wines-14009/vermouth-aperitif-14009017?pageView=grid&orderBy=5&beginIndex="

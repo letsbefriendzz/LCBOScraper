@@ -1,4 +1,4 @@
-from http.client import REQUEST_HEADER_FIELDS_TOO_LARGE
+from unicodedata import category
 from bs4 import BeautifulSoup
 import requests
 import time
@@ -9,11 +9,7 @@ import booze
 
 # SCRAPE
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
-
 file_handle = "_csv_files\\"
-
-# Array to store booze results
-results = []
 
 def time_convert(sec):
     mins = sec // 60
@@ -138,13 +134,35 @@ def scanForBooze(lcbo_url, index = 0):
             break
 
         begin_index = begin_index + 12
-
-# main thread
+def usageData():
+    print("To use the LCBO scraper tool, provide an alcohol category to search.")
+    print("For example -- \"Beer\" will search in the Beer section.")
+    print("You can provide an optional subcategory in the form of a second argument.")
+    print("Such as, \"Beer\" \"IPA\"")
+    print()
+    print("Use --categories to see all types and categories listed.")
+    print()
+# MAIN THREAD
+# category = beer, wine, vodka, etc
 if len(sys.argv) > 1:
     category = sys.argv[1]
-    for type in lcbo_urls[category]:
-        scanForBooze( lcbo_urls[category][type] )
-# category = beer, wine, vodka, etc
+    if category == '--all':
+        pass # create for loop to iterate through all
+    elif category == '--categories':
+        for i in lcbo_urls:
+            print(i)
+            for v in lcbo_urls[i]:
+                print("  ->\t"+v)
+    else:
+        try:
+            for type in lcbo_urls[category]:
+                scanForBooze(lcbo_urls[category][type])
+        except:
+            print("Invalid booze category -- please try again!")
+else:
+    print("Please provide a booze category to scan, or use --all")
+    print()
+    usageData()
 
 
 """
