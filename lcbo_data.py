@@ -4,7 +4,7 @@ lcbo_urls = {
         # LAGERS
         "Amber Lager":      "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/beer-cider-16/lager-16023/amber-lager-16023299?pageView=grid&orderBy=5&beginIndex=",
         "Dark Lager":       "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/beer-cider-16/lager-16023/dark-lager-16023073?pageView=grid&orderBy=5&beginIndex=",
-        "Flavoured Lager":   "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/beer-cider-16/lager-16023/flavoured-lager-16023306?pageView=grid&orderBy=5&beginIndex=",
+        "Flavoured Lager":  "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/beer-cider-16/lager-16023/flavoured-lager-16023306?pageView=grid&orderBy=5&beginIndex=",
         "Pale Lager":       "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/beer-cider-16/lager-16023/pale-lager-16023071?pageView=grid&orderBy=5&beginIndex=",
 
         # ALES

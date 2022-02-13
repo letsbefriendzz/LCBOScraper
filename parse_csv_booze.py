@@ -16,7 +16,6 @@ def open_booze(file_name):
         nodes = booze_csv.split('\n')
         for node in nodes:
             if node.split().count != 0:
-                print(node.split(','))
                 name            = node.split(',')[0]
                 brand           = node.split(',')[1]
                 category        = node.split(',')[2]
@@ -45,5 +44,4 @@ for i in alcohol:
         print("\t" + str(i.price_index))
         print("\t$" + str(i.price))
         print("\t" + str(i.volume) + " mL -\t" + str(i.alc_content) + "%")
-        print("\t" + str(i.url))
         index += 1
