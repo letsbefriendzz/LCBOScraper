@@ -1,3 +1,5 @@
+import os
+import parse_csv_booze
 from bs4 import BeautifulSoup
 import requests
 from lcbo_data import lcbo_urls, parent_categories
@@ -17,10 +19,11 @@ def time_convert(sec):
     print("Time Lapsed = {0}:{1}:{2}".format(int(hours),int(mins),sec))
 
 def write_to_file(b, category):
-    with open(file_handle + category + ".csv", "a+") as f:
+    with open(file_handle + category.replace(' ', '_') + ".csv", "a+") as f:
         f.write(b.toCsv() + "\n")
 
-def scanForBooze(lcbo_url, type, category, index = 0):
+# url, 
+def scanForBooze(lcbo_url, c1, c2, index = 0):
     begin_index = index
     print(lcbo_url)
     while True:
@@ -129,7 +132,7 @@ def scanForBooze(lcbo_url, type, category, index = 0):
 
             # finally, we instantiate a new booze object and append it to our results list.
             # results.append(booze.booze(liq_title, liq_price, liq_volum, percentage, origin, brand))
-            write_to_file(booze.booze(liq_title, liq_price, liq_volum, percentage, origin, brand, str(category.split('_')[0]), str(type), liq_url), category)
+            write_to_file(booze.booze(liq_title, liq_price, liq_volum, percentage, origin, brand, str(c1.split('_')[0]), str(type), liq_url), c1)
             i += 1
         
         if i == 0 or page.status_code != 200:
@@ -149,13 +152,27 @@ def usageData():
 
 def searchAllBooze():
     for ctg in lcbo_urls:
-        for t in lcbo_urls[ctg]:
+        for sctg in lcbo_urls[ctg]:
             u = (lcbo_urls[ctg][t])
-            scanForBooze(u, t, ctg)
+            scanForBooze(u, ctg, sctg)
+
+def setOutputDirectory(path):
+    if os.path.isfile('lcbo_scrape.config') != True:
+        print("lcbo_scrape.config not found!")
+
+    with open("lcbo_scrape.config", "a+") as config:
+        config.write("output_dir:" + "\"" + path + "\"")
 
 # MAIN THREAD
 # category = beer, wine, vodka, etc
 # mainmainmainmain
+
+with open("lcbo_scrape.config", "r") as f:
+    data = f.read()
+    data = data.split('\n')
+    
+    file_handle = data[0].split(':')[1].strip('"')
+
 if len(sys.argv) > 1:
     arg1 = sys.argv[1]
     if arg1 == '--all':
@@ -165,12 +182,23 @@ if len(sys.argv) > 1:
             print(i)
             for v in lcbo_urls[i]:
                 print("  ->\t"+v)
+    elif arg1 == '--opdir':
+        if len(sys.argv) != 3:
+            print("Invalid output dir -- please try again!")
+        else:
+            new_dir = sys.argv[2]
+            if os.path.isdir(new_dir):
+                setOutputDirectory(new_dir)
     else:
-        try:
+    #try:
+        if len(sys.argv) > 2:
+            pass
+            #scanForBooze(lc)
+        else:
             for type in lcbo_urls[arg1]:
-                scanForBooze(lcbo_urls[arg1][type])
-        except:
-            print("Invalid booze category -- please try again!")
+                scanForBooze(lcbo_urls[arg1][type], arg1, type)
+    #except:
+        print("Invalid booze category -- please try again!")
 else:
     print("Please provide a booze category to scan, or use --all")
     print()
