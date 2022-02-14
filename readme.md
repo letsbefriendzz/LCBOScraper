@@ -1,4 +1,5 @@
 # The LCBO Web Scraper
+## & The Quest for Cost Efficient Booze
 
 ### Ryan, Why?
 
@@ -32,3 +33,11 @@ The query string always looked like this:
 With beginIndex defining the index of the search results at which the page will begin at. My guess is that the server generates an array of results, and this beginIndex is literally the index it's ripping from. Not a very adventurous guess.
 
 **When you travel forwards or backwards by a page in the serach results, beginIndex iterates by +-12**.
+
+This query string is a constant suffix on every category. Wonderful. All I've got to do is compile every category and every subcategory into a nested dictionary, call each URL with my webscraping code, and send the results to an appropriately named CSV file.
+
+#### The Webscraping Code
+
+The code itself is super simple, but needed a fair amount of tweaking and is absolutely illegible (by my standards) if it weren't for my commenting. Each element that I'm tracking (name, brand, category, subcategory, price, volume, alcohol content, origin location) needed to be meticulously extracted using lots of `split` and `strip` method calls. BeautifulSoup is really a wonderful library and made this process insanely easy.
+
+More info can be found in the comments of `lcbo_scrape.py`, which contains the main webscraping code.
