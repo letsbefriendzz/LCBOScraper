@@ -16,3 +16,14 @@ _csv_files/Tequila.csv
 _csv_files/Vodka.csv
 _csv_files/Whisky.csv
 _csv_files/Wine.csv
+parent_category_files/Whisky_Parent.csv
+parent_category_files/Vodka_Parent.csv
+parent_category_files/Tequila_Parent.csv
+parent_category_files/Soju_Parent.csv
+parent_category_files/Rum_Parent.csv
+parent_category_files/Liqueur_Parent.csv
+parent_category_files/Grappa_Parent.csv
+parent_category_files/Gin_Parent.csv
+parent_category_files/Fortified Wine_Parent.csv
+parent_category_files/Cognac_Parent.csv
+booze.csv
