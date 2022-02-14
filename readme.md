@@ -8,12 +8,12 @@ Fast forward to a few days ago -- it's my 2B term, I'm living in residence, and 
 
 Naturally, I return to the previously failed project -- and there it is again, the same 403 error that cursed me so many moons ago. But this time, I had a little bit more knowledge of how the web works. With a little bit of luck and some logical deduction, I was able to establish that the Python library I was using for making the HTTP request to the LCBO.com website -- *requests* -- was somehow telling the LCBO servers that it is a robot.
 
-\<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-\<html><head>
-\<title>403 Forbidden</title>
-\</head><body>
-\<h1>Forbidden</h1>
-\<p>You don't have permission to access <web link> on this server.</p>
+\<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN"> <br>
+\<html><head> <br>
+\<title>403 Forbidden</title> <br>
+\</head><body> <br>
+\<h1>Forbidden</h1> <br>
+\<p>You don't have permission to access <web link> on this server.</p> <br>
 
 ### Enter, the ***User-Agent*** HTTP header.
 
