@@ -19,6 +19,7 @@ Naturally, I return to the previously failed project -- and there it is again, t
 The User-Agent HTTP header lets the recipient know some basic information about the device that is sending the request. I don't know what the User-Agent field that the *requests* library is sending looks like, but it's probably telling the server through this field.
 
 Enter the spoof:
+
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
   
 And just like that, status code 200.
