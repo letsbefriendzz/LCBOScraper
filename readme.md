@@ -13,8 +13,13 @@ Naturally, I return to the previously failed project -- and there it is again, t
 \<title>403 Forbidden</title> <br>
 \</head><body> <br>
 \<h1>Forbidden</h1> <br>
-\<p>You don't have permission to access <web link> on this server.</p> <br>
-
+\<p>You don't have permission to access <web link> on this server.</p> <b>
 ### Enter, the ***User-Agent*** HTTP header.
 
-The User-Agent HTTP header lets the recipient know some basic information about the device that is sending the request. I don't know what the User-Agent field that the *requests* library is sending looks like, but it's probably telling the server through 
+The User-Agent HTTP header lets the recipient know some basic information about the device that is sending the request. I don't know what the User-Agent field that the *requests* library is sending looks like, but it's probably telling the server through this field.
+
+Enter the spoof:
+UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
+  
+And just like that, status code 200.
+We're in.
