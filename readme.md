@@ -1,5 +1,5 @@
-# The LCBO Web Scraper
-## & The Quest for Cost Efficient Booze
+# LCBO Web Scraper
+## The Quest for Cost Efficient Booze
 
 ### Ryan, Why?
 
