@@ -15,10 +15,11 @@ The User-Agent HTTP header lets the recipient know some basic information about 
 
 Enter the spoof:
 
-UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
+`UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"`
   
-And just like that, status code 200.
-We're in.
+Pass that as a parameter in my request call, and just like that, status code 200.
+
+***We're in.***
 
 ### How's it work?
   
