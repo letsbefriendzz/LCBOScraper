@@ -1,7 +1,7 @@
-from unicodedata import category
 from bs4 import BeautifulSoup
 import requests
 from lcbo_data import lcbo_urls, parent_categories
+import sys
 
 import booze
 
@@ -31,13 +31,12 @@ def scanForBooze(lcbo_url, type, category, index = 0):
         #{
             # make a request to our URL -- store in page
             page = requests.request("GET", lcbo_url
-                            + str(begin_index)
-                            )
+                            + str(begin_index),
+                            headers={"User-Agent":UA})
             if page.status_code == 200:
                 success = True
             else:
                 print("Request failed... retrying\t" + str(req_fail) + " / 10")
-                print(page.text)
                 req_fail += 1
 
             if req_fail == 10:
@@ -138,6 +137,7 @@ def scanForBooze(lcbo_url, type, category, index = 0):
 
         begin_index = begin_index + 12
 
+# prints usage data
 def usageData():
     print("To use the LCBO scraper tool, provide an alcohol category to search.")
     print("For example -- \"Beer\" will search in the Beer section.")
@@ -146,61 +146,32 @@ def usageData():
     print()
     print("Use --categories to see all types and categories listed.")
     print()
+
+def searchAllBooze():
+    for ctg in lcbo_urls:
+        for t in lcbo_urls[ctg]:
+            u = (lcbo_urls[ctg][t])
+            scanForBooze(u, t, ctg)
+
 # MAIN THREAD
 # category = beer, wine, vodka, etc
-for parent in parent_categories:
-    scanForBooze(parent_categories[parent], "NULL", parent)
-"""
+# mainmainmainmain
 if len(sys.argv) > 1:
-    category = sys.argv[1]
-    if category == '--all':
-        pass # create for loop to iterate through all
-    elif category == '--categories':
+    arg1 = sys.argv[1]
+    if arg1 == '--all':
+        searchAllBooze()
+    elif arg1 == '--categories':
         for i in lcbo_urls:
             print(i)
             for v in lcbo_urls[i]:
                 print("  ->\t"+v)
     else:
         try:
-            for type in lcbo_urls[category]:
-                scanForBooze(lcbo_urls[category][type])
+            for type in lcbo_urls[arg1]:
+                scanForBooze(lcbo_urls[arg1][type])
         except:
             print("Invalid booze category -- please try again!")
 else:
     print("Please provide a booze category to scan, or use --all")
     print()
     usageData()
-
-"""
-# mememememem
-"""
-
-end_time = time.time()
-
-time_elapsed = end_time - start_time
-time_convert(time_elapsed)
-
-price_indices = []
-volumes = []
-names = []
-for r in results:
-    if r.price_index < 0.1 and int(r.volume) > 749:
-        price_indices.append(float(r.price_index))
-        volumes.append(float(r.volume))
-        names.append(r.name)
-    
-
-fig, ax = plt.subplots()
-
-ax.plot(price_indices, volumes, 'o', color='black')
-
-# set titles
-
-for i, txt in enumerate(names):
-    if price_indices[i] <= 0.075:
-        ax.annotate(txt, (price_indices[i], volumes[i]))
-
-ax.set(xlabel="Price Index - $/mL of Alcohol", ylabel="Volume", title="Student Chart of Alcoholism")
-plt.legend()
-plt.show()
-"""
