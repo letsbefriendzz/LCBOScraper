@@ -1,15 +1,13 @@
 from unicodedata import category
 from bs4 import BeautifulSoup
 import requests
-import time
-from lcbo_data import lcbo_urls
-import sys
+from lcbo_data import lcbo_urls, parent_categories
 
 import booze
 
 # SCRAPE
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
-file_handle = "_csv_files\\"
+file_handle = "parent_category_files\\"
 
 def time_convert(sec):
     mins = sec // 60
@@ -18,12 +16,13 @@ def time_convert(sec):
     mins = mins % 60
     print("Time Lapsed = {0}:{1}:{2}".format(int(hours),int(mins),sec))
 
-def write_to_file(b):
+def write_to_file(b, category):
     with open(file_handle + category + ".csv", "a+") as f:
         f.write(b.toCsv() + "\n")
 
-def scanForBooze(lcbo_url, index = 0):
+def scanForBooze(lcbo_url, type, category, index = 0):
     begin_index = index
+    print(lcbo_url)
     while True:
 
         success = False
@@ -32,12 +31,13 @@ def scanForBooze(lcbo_url, index = 0):
         #{
             # make a request to our URL -- store in page
             page = requests.request("GET", lcbo_url
-                            + str(begin_index),
-                            headers={"User-Agent":UA})
+                            + str(begin_index)
+                            )
             if page.status_code == 200:
                 success = True
             else:
                 print("Request failed... retrying\t" + str(req_fail) + " / 10")
+                print(page.text)
                 req_fail += 1
 
             if req_fail == 10:
@@ -130,13 +130,14 @@ def scanForBooze(lcbo_url, index = 0):
 
             # finally, we instantiate a new booze object and append it to our results list.
             # results.append(booze.booze(liq_title, liq_price, liq_volum, percentage, origin, brand))
-            write_to_file(booze.booze(liq_title, liq_price, liq_volum, percentage, origin, brand, str(category), str(type), liq_url))
+            write_to_file(booze.booze(liq_title, liq_price, liq_volum, percentage, origin, brand, str(category.split('_')[0]), str(type), liq_url), category)
             i += 1
         
         if i == 0 or page.status_code != 200:
             break
 
         begin_index = begin_index + 12
+
 def usageData():
     print("To use the LCBO scraper tool, provide an alcohol category to search.")
     print("For example -- \"Beer\" will search in the Beer section.")
@@ -147,6 +148,9 @@ def usageData():
     print()
 # MAIN THREAD
 # category = beer, wine, vodka, etc
+for parent in parent_categories:
+    scanForBooze(parent_categories[parent], "NULL", parent)
+"""
 if len(sys.argv) > 1:
     category = sys.argv[1]
     if category == '--all':
@@ -167,8 +171,10 @@ else:
     print()
     usageData()
 
-
 """
+# mememememem
+"""
+
 end_time = time.time()
 
 time_elapsed = end_time - start_time

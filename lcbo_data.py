@@ -136,3 +136,16 @@ lcbo_urls = {
         "Vermouth/Aperitif":    "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/specialty-wines-14009/vermouth-aperitif-14009017?pageView=grid&orderBy=5&beginIndex="
     }
 }
+
+parent_categories = {
+    "Vodka_Parent":     "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/vodka-15019?pageView=grid&orderBy=5&beginIndex=",
+    "Tequila_Parent":   "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/tequila-15018?pageView=grid&orderBy=5&beginIndex=",
+    "Soju_Parent":      "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/soju?pageView=grid&orderBy=5&beginIndex=",
+    "Whisky_Parent":    "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/whisky?pageView=grid&orderBy=5&beginIndex=",
+    "Rum_Parent":       "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/rum-15016?pageView=grid&orderBy=5&beginIndex=",
+    "Liqueur_Parent":   "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/liqueur?pageView=grid&orderBy=5&beginIndex=",
+    "Cognac_Parent":    "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/cognac-brandy?pageView=grid&orderBy=5&beginIndex=",
+    "Gin_Parent":       "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/gin-15014?pageView=grid&orderBy=5&beginIndex=",
+    "Grappa_Parent":    "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/spirits-15/spirits-15/grappa?pageView=grid&orderBy=5&beginIndex=",
+    "Fortified Wine_Parent": "https://www.lcbo.com/webapp/wcs/stores/servlet/en/lcbo/wine-14/wine-14/fortified-wine?pageView=grid&orderBy=5&beginIndex="
+}

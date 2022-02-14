@@ -57,3 +57,11 @@ class booze:
                   + str(self.alc_content) + ","
                   + "\"" + str(self.origin) + "\"" + ","
                   + "\"" + str(self.url) + "\"" )
+
+    def display(self):
+        print(self.name)
+        print("\t" + str(self.category))
+        print("\t  " + str(self.type))
+        print("\t" + str(self.price_index))
+        print("\t$" + str(self.price))
+        print("\t" + str(self.volume) + " mL -\t" + str(self.alc_content) + "%")
