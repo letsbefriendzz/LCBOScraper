@@ -153,7 +153,7 @@ def usageData():
 def searchAllBooze():
     for ctg in lcbo_urls:
         for sctg in lcbo_urls[ctg]:
-            u = (lcbo_urls[ctg][t])
+            u = (lcbo_urls[ctg][sctg])
             scanForBooze(u, ctg, sctg)
 
 def setOutputDirectory(path):
